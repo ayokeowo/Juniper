@@ -1,0 +1,29 @@
+set version 14.1R1.10
+set system host-name VR
+set interfaces lo0 unit 0 family inet address 10.100.100.1/32
+set interfaces ge-0/0/0 description "DC to R4"
+set interfaces ge-0/0/0 vlan-tagging
+set interfaces ge-0/0/0 unit 47 vlan-id 47 family inet address 172.27.0.30/30
+set interfaces ge-0/0/1 description "DC to R7"
+set interfaces ge-0/0/1 vlan-tagging
+set interfaces ge-0/0/1 unit 47 vlan-id 47 family inet address 172.27.0.34/30
+set routing-instances DC3 instance-type virtual-router
+set routing-instances DC3 interface ge-0/0/0.47
+set routing-instances DC3 interface ge-0/0/1.47
+set routing-instances DC3 interface lo0.0
+set routing-instances DC3 routing-options static route 10.22.1.0/24 reject
+set routing-instances DC3 routing-options static route 10.22.2.0/24 reject
+set routing-instances DC3 routing-options static route 10.22.3.0/24 reject
+set routing-instances DC3 routing-options static route 10.22.4.0/24 reject
+set routing-instances DC3 routing-options static route 10.22.5.0/24 reject
+set routing-instances DC3 routing-options static route 10.22.6.0/24 reject
+set routing-instances DC3 routing-options static route 10.22.7.0/24 reject
+set routing-instances DC3 routing-options static route 0.0.0.0/0 qualified-next-hop 172.27.0.105 preference 3
+set routing-instances DC3 routing-options static route 0.0.0.0/0 qualified-next-hop 172.27.0.103
+set routing-instances DC3 routing-options static route 172.27.0.0/16 next-hop 172.27.0.105
+set routing-instances DC3 routing-options static route 172.27.255.0/30 next-hop 172.27.0.105
+set routing-instances DC3 protocols ospf3 export stat
+set routing-instances DC3 protocols ospf3 area 0.0.0.0 interface ge-0/0/0.47
+set routing-instances DC3 protocols ospf3 area 0.0.0.0 interface ge-0/0/1.47
+set policy-options policy-statement stat term 1 from protocol static
+set policy-options policy-statement stat term 1 then accept
