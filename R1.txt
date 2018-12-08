@@ -1,0 +1,23 @@
+set version 14.1R1.10
+set system host-name R1
+set interfaces ge-0/0/0 unit 0 family inet address 10.202.200.34/30
+set interfaces ge-0/0/0 unit 0 family iso
+set interfaces ge-0/0/0 unit 0 family inet6 address fec0::/64 eui-64
+set interfaces ge-0/0/1 unit 0 family inet address 10.202.200.41/30
+set interfaces ge-0/0/1 unit 0 family iso
+set interfaces ge-0/0/1 unit 0 family inet6 address fec0::/64 eui-64
+set interfaces ge-0/0/2 unit 0 family inet address 10.202.200.49/30
+set interfaces ge-0/0/2 unit 0 family iso
+set interfaces ge-0/0/2 unit 0 family inet6 address fec0::/64 eui-64
+set interfaces ge-0/0/7 vlan-tagging
+set interfaces ge-0/0/7 unit 10 vlan-id 10
+set interfaces ge-0/0/7 unit 10 family inet address 192.168.122.10/24
+set interfaces lo0 unit 0 family inet address 10.202.8.1/32
+set interfaces lo0 unit 0 family iso address 49.0001.0010.2008.1000.00
+set interfaces lo0 unit 0 family inet6 address fec0:202:8::1/32
+set protocols isis no-ipv4-routing
+set protocols isis level 1 disable
+set protocols isis interface all
+set protocols ospf area 0.0.0.1 interface all
+set protocols ospf area 0.0.0.1 interface ge-0/0/7.10 disable
+set protocols ospf area 0.0.0.1 nssa
