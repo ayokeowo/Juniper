@@ -1,2 +1,2 @@
 # Juniper
-Juniper Repo for GNS3
+Lab Repo for GNS3
